@@ -13,7 +13,7 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-Route::get('/', [RegisterController::class, 'index']);
+Route::get('/', [RegisterController::class, 'index'])->name('index');
 Route::get('/csv', [RegisterController::class, 'create_csv'])->middleware('auth');
 Route::get('/registers/create', [RegisterController::class, 'create'])->middleware('auth');
 Route::get('/registers/{id}', [RegisterController::class, 'show']);
@@ -22,4 +22,4 @@ Route::delete('/registers/{id}', [RegisterController::class, 'destroy'])->middle
 Route::get('/registers/edit/{id}', [RegisterController::class, 'edit'])->middleware('auth');
 Route::put('/registers/update/{id}', [RegisterController::class, 'update'])->middleware('auth');
 
-Route::get('/registers/orderby', [RegisterController::class, 'orderby'])->middleware('auth')->name('orderby');
+//Route::get('/registers/orderby', [RegisterController::class, 'orderby'])->middleware('auth')->name('orderby');

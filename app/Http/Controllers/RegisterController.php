@@ -13,10 +13,32 @@ use \DateTime;
 class RegisterController extends Controller
 {
    
-    public function index()
+    public function index(Request $request)
     {        
-     
-        $qty = 3;
+       //dd($request->orderBy);
+       $order='asc';
+       $order_name = "nome";
+       $qty = 5;
+
+        if($request->orderBy) {
+            switch ($request->orderBy) {
+                case "name_desc":
+                    $order="desc";
+                    break;
+                case "age_desc":
+                    $order="desc";
+                    $order_name = "datanasci";
+                    break;
+                case "name_asc":
+                    $order = "asc";
+                    break;
+                case "age_asc":
+                    $order = "asc";
+                    $order_name = "datanasci";
+                     break;   
+           
+            }
+        }
         //$generate_csv = request('generate_csv');
         $search = request('search');
         $date_search_begin = \DateTime::createFromFormat('Y-m-d', request('date_search_begin'));
@@ -29,11 +51,11 @@ class RegisterController extends Controller
         }else if ($date_search_begin && $date_search_end) {
             $query->whereDate('created_at', '>=', $date_search_begin);
             $query->whereDate('created_at', '<=', $date_search_end);
-            $registers = $query->orderBy('nome', 'asc')->paginate($qty);
+            $registers = $query->orderBy($order_name, $order)->paginate($qty)->appends($request->all());
             //SELECT * FROM registers WHERE DATE(created_at) >= ? AND DATE(created_at) <= ?
         }
         else {
-            $registers = Register::orderBy('nome', 'asc')->paginate($qty);
+            $registers = Register::orderBy($order_name, $order)->paginate($qty)->appends($request->all());
          }
  
         return view('welcome', ['registers' => $registers, 'search' => $search]);
@@ -125,29 +147,27 @@ class RegisterController extends Controller
 
         return redirect('/')->with('msg', 'Cadastro editado com sucesso!');
     }
-    public function orderby() {
-      
+    public function orderby(Request $request) {
+        
         return redirect('/');
     }
 
     public function create_csv() {
 
-        //$u = Child::find(1);
-        //dd($u);
 
         $csv = Writer::createFromFileObject(new \SplTempFileObject());
-        $users = Register::orderBy('nome', 'asc')->paginate();
+        $registers = Register::select('nome','email','telefone','datanasci','id')->orderBy('nome', 'asc')->paginate();
+        $childs = Child::select('nome','idade','sexo', 'id_register')->orderBy('id_register', 'asc')->paginate();
 
-        $child = Child::orderBy('id_register', 'asc')->paginate();
-        foreach($users as $user){
-            foreach($child as $c){
-                if($c->id_register == $user->id)
-                    $csv->insertOne($user->toArray());
+        foreach($registers as $register) {
+            $csv->insertOne($register->toArray());
+            foreach($childs as $child){
+                if($register['id'] == $child['id_register']){
+                    $csv->insertOne($child->toArray());;
+                }
             }
-                    
-
-           
         }
+
         $csv->output('usuarios_'.Carbon::now().'.csv');
     }
 }

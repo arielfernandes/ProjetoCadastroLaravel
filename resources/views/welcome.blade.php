@@ -36,7 +36,7 @@
                 </form>
           </div>
           <div id="container-order"> 
-            <form action="{{ route('orderby') }}" method="GET">
+            <form action="{{ route('index') }}" method="GET">
               <div id="container-options">
                 <input type="submit" class="btn btn-primary" value="Ordenar">
                 <div class="form-group col-md-6">
