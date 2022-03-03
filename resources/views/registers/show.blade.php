@@ -21,9 +21,9 @@
         @if ($children)
         {{-- Pegando e informando filhos se houver.--}}
         @foreach ($children as $child)
-        <p class="event-city"><ion-icon name="balloon-outline"></ion-icon>  {{ $child['nome']}} </p>
-         <p class="event-city"><ion-icon name="balloon-outline"></ion-icon>  {{ $child['idade']}} </p>
-         <p class="event-city"><ion-icon name="balloon-outline"></ion-icon>  {{ $child['sexo']}} </p>
+        <p class="event-city">Nome: {{ $child['nome']}} </p>
+         <p class="event-cit">Idade:  {{ $child['idade']}} </p>
+         <p class="event-cit">Sexo:  {{ $child['sexo']}} </p>
 
         @endforeach
         @else
@@ -37,7 +37,7 @@
             </button>
         </div>
         <div>
-            <form action="/registers/edit/{{ $register->id}}" method="GET">
+            <form action="/registers/{{ $register->id}}" method="POST">
                 @csrf 
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger delete-btn">

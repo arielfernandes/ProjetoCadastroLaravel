@@ -40,8 +40,16 @@
           <input type="number" class="form-control" id="idade" name="idade" placeholder="idade" value="{{ $child['idade']}}">
       </div>
          <div class="form-group mt-3">
-          <label for="datanasci">Sexo</label>
-          <input type="text" class="form-control" id="sexo" name="sexo" placeholder="sexo" value="{{ $child['sexo']}}">
+            <label id="label_sexo" for="sexo">Sexo: </label>
+          
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="people[1][sexo]"" id="inlineRadio1" value="Masc">
+                <label class="form-check-label" for="inlineRadio1">Masculino</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="people[1][sexo]"" id="inlineRadio2" value="Fem">
+                <label class="form-check-label" for="inlineRadio2">Femino</label>
+              </div>
       </div>
      
         @endforeach

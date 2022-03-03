@@ -34,41 +34,90 @@
             <input type="radio" id="child_no" name="child_" value="1" onclick="displayFormChild('no')" required>
             <label for="child_no">Não</label><br>  
          </div>
-         <div class="input_child">
-             <div class="form-group mt-3">
-                <label for="telefone">Nome:</label>
-                <input type="text" class="form-control" id="child_name" name="child_name" placeholder="Nome Filho" required>
-            </div>
+
+        <div class="input_child " id="people-container">
             <div class="form-group mt-3">
-                <label for="email">Idade:</label>
-                <input type="number" class="form-control" id="idade" name="idade" placeholder="idade" required>
+                <label id="label_child_name" for="child_name">Nome:</label>
+                <input type="text" class="form-control" id="child_name" name="people[1][nome]" placeholder="Nome Filho" required>
             </div>
                <div class="form-group mt-3">
-                <label for="datanasci">Sexo</label>
-                <input type="text" class="form-control" id="sexo" name="sexo" placeholder="sexo" required>
+                <label id="label_idade" for="idade">Idade:</label>
+                <input type="number" class="form-control" id="idade" name="people[1][idade]" placeholder="idade" required>
+               </div>
+                <div class="form-group mt-3">
+                    <label id="label_sexo" for="sexo">Sexo: </label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="people[1][sexo]"" id="inlineRadio1" value="Masc">
+                        <label class="form-check-label" for="inlineRadio1">Masculino</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="people[1][sexo]"" id="inlineRadio2" value="Fem">
+                        <label class="form-check-label" for="inlineRadio2">Femino</label>
+                      </div>
+                    </div>
+               </div>
+               <!--button type="button" class="btn btn-primary mt-3" onclick="adicionarCampo()" value="Filhos">+</button-->
+               <a href="javascript:;" class="btn btn-primary mt-3" id="add-new-person">Add Filho</a>
             </div>
+            <input type="submit" class="btn btn-primary mt-3 " value="Cadastrar">
         </div>
-        
-        <input type="submit" class="btn btn-primary mt-3" value="Cadastrar">
     </form>
 </div>
 
 <script>
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
+    document.onload = function() {
+        
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
 
-    if (dd < 10) {
-       dd = '0' + dd;
+        if (dd < 10) {
+           dd = '0' + dd;
+        }
+
+        if (mm < 10) {
+           mm = '0' + mm;
+        } 
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("datanasci").setAttribute("max", today);
+    }
+    let i = 3;
+    document.getElementById('add-new-person').onclick = function () {
+        let template = `
+        <div id="campo${i}">
+            <div class="form-group mt-3">
+                    <label id="label_child_name" for="child_name">Nome:</label>
+                    <input type="text" class="form-control" id="child_name" name="people[${i}][nome]" placeholder="Nome Filho" required>
+            </div>
+            <div class="form-group mt-3">
+                <label id="label_idade" for="idade">Idade:</label>
+                <input type="number" class="form-control" id="idade" name="people[${i}][idade]" placeholder="idade" required>
+            </div>
+            <div class="form-group mt-3">
+                <label id="label_sexo" for="sexo">Sexo: </label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="people[${i}][sexo]"" id="inlineRadio1" value="Masc">
+                        <label class="form-check-label" for="inlineRadio1">Masculino</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="people[${i}][sexo]"" id="inlineRadio2" value="Fem">
+                        <label class="form-check-label" for="inlineRadio2">Femino</label>
+                      </div>
+                    </div>
+            </div>
+            <button type="button" class="btn btn-primary mt-3" id="campo${i}" onclick="removerCampo(${i})"> - </button>
+        </div>`;
+
+        let container = document.getElementById('people-container');
+        let div = document.createElement('div');
+        div.innerHTML = template;
+        container.appendChild(div);
+
+        i++;
     }
 
-    if (mm < 10) {
-       mm = '0' + mm;
-    } 
-
-    today = yyyy + '-' + mm + '-' + dd;
-    document.getElementById("datanasci").setAttribute("max", today);
 </script>
 
 @endsection

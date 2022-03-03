@@ -68,6 +68,8 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
 
+       // dd($request->all());
+       $dataForm = $request->all();
         $register = new Register;
         $child_register = new Child;
 
@@ -84,27 +86,27 @@ class RegisterController extends Controller
         //Salvando dados no banco
         $register->save();
 
-        //dd($request->child_);
-        if (!$request->child_) {
-            $child_register->nome = $request->nome;
-            $child_register->idade = $request->idade;
-            $child_register->sexo = $request->sexo;
+         $dataForm = $request->people;
 
-            //Relacionado usuario com tabela de filhos
-            //$register_user = $register->child();
-            $child_register->id_register = $register->id;
+         if (!$request->child_) {
+            $finalArray = array();
 
-            $child_register->save();
+            $id_Register = $register->id;
+            foreach($dataForm as $key =>$pessoa){
+                array_push($finalArray, array(
+                    'nome' => $pessoa['nome'],
+                    'idade'=> $pessoa['idade'],
+                    'sexo' => $pessoa['sexo'],
+                    'id_register' => $id_Register
+                    )
+                );
+            }
+            Child::insert($finalArray);
         }
-
-
-
-
-
-        //$child_register->save();
-
+             
         return redirect('/')->with('msg', 'Cadastro realizado com sucesso!');
-    }
+   }
+
     public function show($id)
     {
 
@@ -133,7 +135,7 @@ class RegisterController extends Controller
         return view('registers.edit', ['register' => $register, 'children' => $children]);
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request){
         //$dataForm = $request->all();
         //$register = Register::find($id);
         //
