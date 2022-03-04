@@ -17,14 +17,15 @@
         <p class="event-city"><ion-icon name="finger-print-outline"></ion-icon> {{ $register->cpf}}</p>
         <label for="nome">Data de Nascimento:</label>
         <p class="event-city"><ion-icon name="calendar-outline"></ion-icon> {{ date('d/m/Y', strtotime($register->datanasci)) }}</p>
-        <label for="nome">Filhos:</label>
         @if ($children)
+        <label for="nome" class="mt-3">Filhos:</label>
+        <hr>
         {{-- Pegando e informando filhos se houver.--}}
         @foreach ($children as $child)
         <p class="event-city">Nome: {{ $child['nome']}} </p>
          <p class="event-cit">Idade:  {{ $child['idade']}} </p>
          <p class="event-cit">Sexo:  {{ $child['sexo']}} </p>
-
+        <hr>
         @endforeach
         @else
         <p class="event-city"><ion-icon name="balloon-outline"></ion-icon> não possui filhos </p>

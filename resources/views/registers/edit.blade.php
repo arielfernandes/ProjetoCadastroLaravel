@@ -30,7 +30,6 @@
         </div>
         @if ($children)
         {{-- Pegando e informando filhos se houver.--}}
-        {{$i = 0}}
         @foreach ($children as $child)
         <div class="form-group mt-3">
           <label for="telefone">Nome:</label>

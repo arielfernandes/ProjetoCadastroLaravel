@@ -150,20 +150,23 @@
   /*Option and Order*/
   .options_ {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+  }
+  .options_ {
+    padding: 10px;
   }
   #csv_container {
     display: block;
   }
   #container-order select {
-    width: 150px;
+    width: 120px;
   }
   #container-options {
     display: flex;
     justify-content: space-between;
   }
   #container-options {
-    padding: 10px;s
+    padding: 10px;
   }
   /* register create page */
   #register-create-container {

@@ -58,7 +58,7 @@ class RegisterController extends Controller
             $registers = Register::orderBy($order_name, $order)->paginate($qty)->appends($request->all());
          }
  
-        return view('welcome', ['registers' => $registers, 'search' => $search]);
+        return view('welcome', ['registers' => $registers, 'search' => $search, 'qty' => $qty]);
     }
 
     public function create()
