@@ -87,7 +87,6 @@ class RegisterController extends Controller
         $register->save();
 
          $dataForm = $request->people;
-
          if (!$request->child_) {
             $finalArray = array();
 
@@ -125,26 +124,44 @@ class RegisterController extends Controller
         return redirect('/')->with('msg', 'Cadastro Excluido com sucesso!');
     }   
     public function edit($id) {
-       
+
         $register = Register::findOrFail($id);
 
        $children = $register->child();
       //Pegando valores da tabela child via id, refereciando a tabela mãe
        $children = Child::where('id_register', $register->id)->get()->toArray();
-      // dd($children);
+      //dd($children);
         return view('registers.edit', ['register' => $register, 'children' => $children]);
     }
 
     public function update(Request $request){
-        //$dataForm = $request->all();
-        //$register = Register::find($id);
-        //
-        //if($register) {
-        //    $register->update($dataForm);
-        //  $register->child()->update($dataForm);
-        //}
+      $dataForm = $request->people;
+     //dd($dataForm);
+     //  exit;
+        $finalArray = array();
+        $id_Register = $request->id;
+        Child::where('id_register', $id_Register)->delete();
 
+        foreach($dataForm as $key =>$pessoa){
+            array_push($finalArray, array(
+                'nome' => $pessoa['nome'],
+                'idade'=> $pessoa['idade'],
+                'sexo' => $pessoa['sexo'],
+                'id_register' => $id_Register
+                )
+            );
+       }
+       Child::insert($finalArray);
+
+     //   dd($finalArray);
+      // exit;
+
+       //Child::findOrFail($request->id)->update($finalArray);
+        // Child::insert($finalArray);        
+        // exit;
+        
         Register::findOrFail($request->id)->update($request->all());
+       // Child::findOrFail($request->id_register)->update($request->people->toArry());
 
 
         return redirect('/')->with('msg', 'Cadastro editado com sucesso!');

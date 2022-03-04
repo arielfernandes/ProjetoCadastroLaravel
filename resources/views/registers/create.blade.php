@@ -47,19 +47,19 @@
                 <div class="form-group mt-3">
                     <label id="label_sexo" for="sexo">Sexo: </label>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="people[1][sexo]"" id="inlineRadio1" value="Masc">
+                        <input class="form-check-input" type="radio" name="people[1][sexo]" id="inlineRadio1" value="Masc">
                         <label class="form-check-label" for="inlineRadio1">Masculino</label>
                       </div>
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="people[1][sexo]"" id="inlineRadio2" value="Fem">
+                        <input class="form-check-input" type="radio" name="people[1][sexo]" id="inlineRadio2" value="Fem">
                         <label class="form-check-label" for="inlineRadio2">Femino</label>
                       </div>
                     </div>
+                    <a href="javascript:;" class="btn btn-primary mt-3" id="add-new-person">Add Filho</a>
                </div>
                <!--button type="button" class="btn btn-primary mt-3" onclick="adicionarCampo()" value="Filhos">+</button-->
-               <a href="javascript:;" class="btn btn-primary mt-3" id="add-new-person">Add Filho</a>
+               <input type="submit" class="btn btn-primary mt-3 " value="Cadastrar">
             </div>
-            <input type="submit" class="btn btn-primary mt-3 " value="Cadastrar">
         </div>
     </form>
 </div>

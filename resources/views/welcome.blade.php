@@ -82,7 +82,9 @@
         </table>
         <!-- Pagination -->
         <div class="d-flex justify-content-center">
-        {{$registers->links() ?? ""}}
+          @if(count($registers) > 0)
+          {{$registers->links()}}
+          @endif
         </div>
       </div>
         @if(count($registers) == 0 && $search)

@@ -30,24 +30,25 @@
         </div>
         @if ($children)
         {{-- Pegando e informando filhos se houver.--}}
+        {{$i = 0}}
         @foreach ($children as $child)
         <div class="form-group mt-3">
           <label for="telefone">Nome:</label>
-          <input type="text" class="form-control" id="child_name" name="child_name" placeholder="Nome Filho" value="{{ $child['nome']}}">
+          <input type="text" class="form-control" id="child_name" name="people[{{ $child['id'] }}][nome]" placeholder="Nome Filho" value="{{ $child['nome']}}">
       </div>
       <div class="form-group mt-3">
           <label for="email">Idade:</label>
-          <input type="number" class="form-control" id="idade" name="idade" placeholder="idade" value="{{ $child['idade']}}">
+          <input type="number" class="form-control" id="idade" name="people[{{ $child['id'] }}][idade]" placeholder="idade" value="{{ $child['idade']}}">
       </div>
          <div class="form-group mt-3">
             <label id="label_sexo" for="sexo">Sexo: </label>
           
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="people[1][sexo]"" id="inlineRadio1" value="Masc">
+                <input class="form-check-input" type="radio" name="people[{{ $child['id'] }}][sexo]" id="inlineRadio1" value="Masc" required>
                 <label class="form-check-label" for="inlineRadio1">Masculino</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="people[1][sexo]"" id="inlineRadio2" value="Fem">
+                <input class="form-check-input" type="radio" name="people[{{ $child['id'] }}][sexo]" id="inlineRadio2" value="Fem" required>
                 <label class="form-check-label" for="inlineRadio2">Femino</label>
               </div>
       </div>
