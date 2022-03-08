@@ -31,6 +31,7 @@
         @if ($children)
         {{-- Pegando e informando filhos se houver.--}}
         @foreach ($children as $child)
+        <div id="people-container">
         <div class="form-group mt-3">
           <label for="telefone">Nome:</label>
           <input type="text" class="form-control" id="child_name" name="people[{{ $child['id'] }}][nome]" placeholder="Nome Filho" value="{{ $child['nome']}}">
@@ -41,22 +42,29 @@
       </div>
          <div class="form-group mt-3">
             <label id="label_sexo" for="sexo">Sexo: </label>
-          
+      
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="people[{{ $child['id'] }}][sexo]" id="inlineRadio1" value="Masc" required>
+                <input  class="form-check-input" type="radio" name="people[{{ $child['id'] }}][sexo]"  id="masc_{{ $child['id'] }}" value="Masc" required>
                 <label class="form-check-label" for="inlineRadio1">Masculino</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="people[{{ $child['id'] }}][sexo]" id="inlineRadio2" value="Fem" required>
-                <label class="form-check-label" for="inlineRadio2">Femino</label>
+                <input   class="form-check-input" type="radio" name="people[{{ $child['id'] }}][sexo]"  id="fem_{{ $child['id'] }}"  value="Fem" required>
+                <label class="form-check-label" for="inlineRadio2">Feminino</label>
               </div>
       </div>
-     
+      <div>
         @endforeach
         @else
         <p class="event-city"><ion-icon name="balloon-outline"></ion-icon> não possui filhos </p>
         @endif
+        
+        
         <input type="submit" class="btn btn-primary mt-3" value="Editar">
+        <input type="button" class="btn btn-primary mt-3" id="add-new-person" onclick="moreChild()" value="Add Filho">
+
     </form>
 </div>
+<script src="/js/custom.js"></script>
+
+
 @endsection

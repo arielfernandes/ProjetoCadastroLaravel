@@ -12,8 +12,8 @@
             <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required>
         </div>
         <div class="form-group mt-3">
-            <label for="telefone">Telefone:</label>
-            <input type="text" class="form-control" id="telefone" name="telefone" placeholder="(00) 0000-0000" required>
+            <label for="telefone">Telefone:</label> 
+            <input type="text" class="form-control" id="telefone" name="telefone" placeholder="(00) 0000-0000" maxlength="14" required>
         </div>
         <div class="form-group mt-3">
             <label for="email">E-mail:</label>
@@ -55,9 +55,8 @@
                         <label class="form-check-label" for="inlineRadio2">Femino</label>
                       </div>
                     </div>
-                    <a href="javascript:;" class="btn btn-primary mt-3" id="add-new-person" onclick="moreChild()">Add Filho</a>
-               </div>
-               <!--button type="button" class="btn btn-primary mt-3" onclick="adicionarCampo()" value="Filhos">+</button-->
+                    <input type="button" class="btn btn-primary mt-3" id="add-new-person" onclick="moreChild()" value="Add Filho">
+                </div>
                <input type="submit" class="btn btn-primary mt-3 " value="Cadastrar">
             </div>
         </div>

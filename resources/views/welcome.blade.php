@@ -66,7 +66,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                @foreach($registers as $register)
+                    
+                  @foreach($registers as $register)
                     <tr>
                       <th scope="row">{{ $loop->index+1}}</th>
                       <td>{{ $register->nome }}</td>
@@ -82,12 +83,12 @@
         </table>
         <!-- Pagination -->
         <div class="d-flex justify-content-center">
-          @if(sizeof($registers) > 1 && count($registers) == $qty)
+          @if(sizeof($registers) > 1 && count($registers) <= $qty)
           {{$registers->links() }}
           @endif
         </div>
       </div>
-        @if(count($registers) == 0 && $search)
+         @if(count($registers) == 0 && $search)
         <p>Não foi possível encontrar nenhum usuário com {{ $search }}! <a href="/">Ver todos!</a></p>
         @elseif(count($registers) == 0)
         <p>Não há nenhum cadastro!</p>

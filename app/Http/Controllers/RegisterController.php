@@ -16,9 +16,9 @@ class RegisterController extends Controller
     public function index(Request $request)
     {        
        //dd($request->orderBy);
-       $order='asc';
-       $order_name = "nome";
-       $qty = 5;
+        $order='asc';
+        $order_name = "nome";
+        $qty = 5;
 
         if($request->orderBy) {
             switch ($request->orderBy) {
@@ -46,16 +46,25 @@ class RegisterController extends Controller
         
         $query = Register::query();
 
+        // if($search && $date_search_begin && $date_search_end){
+        //     // $query->whereDate('datanasci', '>=', $date_search_begin);
+        //     // $query->whereDate('datanasci', '<=', $date_search_end);
+        //  //   $registers = Register::where([['nome', 'like', '%' . $search . '%']])->get();
+        // }else
         if ($search) {
-            $registers = Register::where([['nome', 'like', '%' . $search . '%']])->get();
-        }else if ($date_search_begin && $date_search_end) {
-            $query->whereDate('created_at', '>=', $date_search_begin);
-            $query->whereDate('created_at', '<=', $date_search_end);
+                $registers = Register::where([['nome', 'like', '%' . $search . '%']])->get();
+
+        }elseif($date_search_begin && $date_search_end) {
+            $query->whereDate('datanasci', '>=', $date_search_begin);
+            $query->whereDate('datanasci', '<=', $date_search_end);
             $registers = $query->orderBy($order_name, $order)->paginate($qty)->appends($request->all());
             //SELECT * FROM registers WHERE DATE(created_at) >= ? AND DATE(created_at) <= ?
-        }
-        else {
+
+
+      
+         } else {
             $registers = Register::orderBy($order_name, $order)->paginate($qty)->appends($request->all());
+
          }
  
         return view('welcome', ['registers' => $registers, 'search' => $search, 'qty' => $qty]);

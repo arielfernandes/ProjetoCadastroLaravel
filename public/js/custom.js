@@ -14,9 +14,9 @@ function setRequired(val){
     }
 }   
 
-let i = 3;
+let i = 0;
 function moreChild(){
-document.getElementById('add-new-person')
+    document.getElementById('add-new-person')
     let template = `
     <div id="campo${i}">
         <div class="form-group mt-3">
@@ -40,12 +40,16 @@ document.getElementById('add-new-person')
                 </div>
         </div>
         <button type="button" class="btn btn-primary mt-3" id="campo${i}" onclick="removerCampo(${i})"> - </button>
-    </div>`;
+        </div>
+    `;
 
     let container = document.getElementById('people-container');
     let div = document.createElement('div');
     div.innerHTML = template;
-    container.appendChild(div);
+
+    container.before(div)
+
+    // container.apendChild(div);
 
     i++;
 }
@@ -53,5 +57,6 @@ document.getElementById('add-new-person')
 
 
 function removerCampo(idCampo){
+    document.getElementById('campo' + idCampo).remove();
     document.getElementById('campo' + idCampo).remove();
 }
