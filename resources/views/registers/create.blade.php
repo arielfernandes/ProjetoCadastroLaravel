@@ -13,7 +13,7 @@
         </div>
         <div class="form-group mt-3">
             <label for="telefone">Telefone:</label> 
-            <input type="text" class="form-control" id="telefone" name="telefone" placeholder="(00) 0000-0000" maxlength="14" required>
+            <input type="text" class="form-control" id="telefone" name="telefone" data-js="telefone" placeholder="(00) 0000-0000" required>
         </div>
         <div class="form-group mt-3">
             <label for="email">E-mail:</label>
@@ -21,7 +21,7 @@
         </div>
         <div class="form-group mt-3">
             <label for="cpf">CPF:</label>
-            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14" required>
+            <input type="text" class="form-control" id="cpf" name="cpf" data-js="cpf" placeholder="000.000.000-00"  required>
         </div>
         <div class="form-group mt-3">
             <label for="datanasci">Data de Nascimento:</label>
@@ -81,7 +81,37 @@
         today = yyyy + '-' + mm + '-' + dd ;
         document.getElementById("datefield").setAttribute("max", today);
     }
-  
+window.onload = function() {
+const masks = {
+    cpf (value) {
+        return value
+        .replace(/\D/g, '')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+        .replace(/(-\d{2})\d+?$/, '$1')
+        
+    },
+    telefone (value) {
+        return value
+        .replace(/\D/g, '')
+        .replace(/(\d{2})(\d)/, '($1)$2')
+        .replace(/(\d{4})(\d)/, '$1-$2')
+        .replace(/(\d{4})-(\d)(\d{4})/, '$1$2-$3')
+        .replace(/(-\d{4})\d+?$/, '$1')
+
+        
+    }
+}
+
+document.querySelectorAll('input').forEach(($input) => {
+    const field = $input.dataset.js;
+
+    $input.addEventListener('input', (e) => {
+        e.target.value = masks[field](e.target.value)
+    }, false);
+});
+}
 </script>
 
 @endsection

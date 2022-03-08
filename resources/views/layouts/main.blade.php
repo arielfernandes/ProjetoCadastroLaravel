@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 
-<body class="antialiased">
+<body class="antialiased" >
     <header>
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="collapse navbar-collapse" id="navbar">

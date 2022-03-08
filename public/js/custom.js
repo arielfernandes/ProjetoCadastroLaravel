@@ -1,22 +1,26 @@
-function displayFormChild(event){
-    if(event == 'yes') {
-        document.getElementsByClassName('input_child')[0].style.display = "block";
+function displayFormChild(event) {
+    if (event == "yes") {
+        document.getElementsByClassName("input_child")[0].style.display =
+            "block";
         setRequired(true);
-    }else {
-        document.getElementsByClassName('input_child')[0].style.display = "none";
+    } else {
+        document.getElementsByClassName("input_child")[0].style.display =
+            "none";
         setRequired(false);
     }
 }
-function setRequired(val){
-    input = document.getElementsByClassName("input_child")[0].getElementsByTagName('input');
-    for(i = 0; i < input.length; i++){
+function setRequired(val) {
+    input = document
+        .getElementsByClassName("input_child")[0]
+        .getElementsByTagName("input");
+    for (i = 0; i < input.length; i++) {
         input[i].required = val;
     }
-}   
+}
 
 let i = 0;
-function moreChild(){
-    document.getElementById('add-new-person')
+function moreChild() {
+    document.getElementById("add-new-person");
     let template = `
     <div id="campo${i}">
         <div class="form-group mt-3">
@@ -43,20 +47,18 @@ function moreChild(){
         </div>
     `;
 
-    let container = document.getElementById('people-container');
-    let div = document.createElement('div');
+    let container = document.getElementById("people-container");
+    let div = document.createElement("div");
     div.innerHTML = template;
 
-    container.before(div)
+    container.before(div);
 
     // container.apendChild(div);
 
     i++;
 }
 
-
-
-function removerCampo(idCampo){
-    document.getElementById('campo' + idCampo).remove();
-    document.getElementById('campo' + idCampo).remove();
+function removerCampo(idCampo) {
+    document.getElementById("campo" + idCampo).remove();
+    document.getElementById("campo" + idCampo).remove();
 }
