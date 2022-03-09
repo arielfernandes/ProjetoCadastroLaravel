@@ -18,7 +18,7 @@ class RegisterController extends Controller
        //dd($request->orderBy);
         $order='asc';
         $order_name = "nome";
-        $qty = 5;
+        $qty = 6;
 
         if($request->orderBy) {
             switch ($request->orderBy) {
@@ -58,6 +58,7 @@ class RegisterController extends Controller
             $query->whereDate('datanasci', '>=', $date_search_begin);
             $query->whereDate('datanasci', '<=', $date_search_end);
             $registers = $query->orderBy($order_name, $order)->paginate($qty)->appends($request->all());
+            //appends($request->all());
             //SELECT * FROM registers WHERE DATE(created_at) >= ? AND DATE(created_at) <= ?
 
 
@@ -66,7 +67,6 @@ class RegisterController extends Controller
             $registers = Register::orderBy($order_name, $order)->paginate($qty)->appends($request->all());
 
          }
- 
         return view('welcome', ['registers' => $registers, 'search' => $search, 'qty' => $qty]);
     }
 

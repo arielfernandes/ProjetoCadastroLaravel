@@ -83,8 +83,9 @@
         </table>
         <!-- Pagination -->
         <div class="d-flex justify-content-center">
+          
           @if(sizeof($registers) > 1 && count($registers) <= $qty)
-          {{$registers->links() }}
+          {{ $registers->links() }}
           @endif
         </div>
       </div>
