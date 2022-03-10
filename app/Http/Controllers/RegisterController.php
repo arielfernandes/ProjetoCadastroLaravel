@@ -80,7 +80,6 @@ class RegisterController extends Controller
        // dd($request->all());
        $dataForm = $request->all();
         $register = new Register;
-        $child_register = new Child;
 
         $register->nome = $request->nome;
         $register->email = $request->email;

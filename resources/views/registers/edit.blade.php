@@ -44,13 +44,15 @@
             <label id="label_sexo" for="sexo">Sexo: </label>
       
             <div class="form-check form-check-inline">
-                <input  class="form-check-input" type="radio" name="people[{{ $child['id'] }}][sexo]"  id="masc_{{ $child['id'] }}" value="Masc" required>
+                <input  class="form-check-input" type="radio" name="people[{{ $child['id'] }}][sexo]"  {{ ($child['sexo']=="Masc")? "checked" : "" }} id="masc_{{ $child['id'] }}" value="Masc" required>
                 <label class="form-check-label" for="inlineRadio1">Masculino</label>
               </div>
               <div class="form-check form-check-inline">
-                <input   class="form-check-input" type="radio" name="people[{{ $child['id'] }}][sexo]"  id="fem_{{ $child['id'] }}"  value="Fem" required>
+                <input   class="form-check-input" type="radio" name="people[{{ $child['id'] }}][sexo]"  {{ ($child['sexo']=="Fem")? "checked" : "" }} id="fem_{{ $child['id'] }}"  value="Fem" required>
                 <label class="form-check-label" for="inlineRadio2">Feminino</label>
               </div>
+
+
       </div>
       <div>
         @endforeach
